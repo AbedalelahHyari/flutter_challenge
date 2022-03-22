@@ -20,6 +20,7 @@ class _MyAppState extends State<MyApp> {
   var arr = "";
   int bubble = 0;
   int insertion = 0;
+  int selection = 0;
 
   late List newArray;
 
@@ -107,14 +108,16 @@ class _MyAppState extends State<MyApp> {
 
   /* Algorithm:-
   *
-  * 1- at the first, I need to give value to the newArray which it a list of integers from the input field by using this built-in  * method json.decode(source)
+  * 1- at the first, I need to give value to the newArray which it a list of integers from the input field by using this built-in
+  * method json.decode(source)
   *
   * 2- I will make an instance from the Stopwatch to start counting the time execution for the method
   *  to know the sorting time will take it.
   *
   * 3- I need to make a loop over the arr starting from index 1
   *
-  * 4- I need to declare two variables currentElement and j and assign the currentElement to the current element in the array,     * assign the index to the previous element to the j
+  * 4- I need to declare two variables currentElement and j and assign the currentElement to the current element in the array,
+  * assign the index to the previous element to the j
   *
   * 5- make a while loop that will check if the j more than or equal zero and newArray[j] > currentElement
   *
@@ -133,7 +136,7 @@ class _MyAppState extends State<MyApp> {
 
   void insertionSort(arr) {
     newArray = List<int>.from(json.decode(arr));
-    print('undOrder insertion $newArray');
+    //print('undOrder insertion $newArray');
     Stopwatch stopwatch2 = Stopwatch()..start();
     for (int i = 1; i < newArray.length; i++) {
       int currentElement = newArray[i];
@@ -148,11 +151,67 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       insertion = stop;
     });
-    print('Order insertion $newArray');
+    // print('Order insertion $newArray');
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////
 
+  // Selection Sort //
+  /*
+  * Algorithm:-
+  *
+  * 1- at the first, I need to give value to the newArray which it a list of integers from the input field by using this built-in
+  *    method json.decode(source)
+  * 2- I initialize two variables minElement and temp
+  *
+  * 3- I will make an instance from the Stopwatch to start counting the time execution for the method
+  *  to know the sorting time will take it.
+  *
+  * 4- I need to make a loop over the list starting from index 0
+  *
+  * 5- I will assign value i to the minElement
+  *
+  * 6- I will make another loop to starting from index 1
+  *
+  * 7- I will compare if the current element less than of the element which I assumed its the minElement I will reassign the minElement
+  *  with the index of that element that will match the condition
+  *
+  * 8- I will store the minElement in the temp variable
+  *
+  * 9- I will make a swap process between the two elements
+  *
+  * 10- I will declare a variable called stop with value contain the time execution which i take it from
+  *    from the instance i declare it at the first of function (stopwatch3)
+  *
+  * 11- after this I will create setState method that will assign the value for the (stop variable) to the (bubble variable).
+  *     Then I will show the result inside the container
+ */
+
+  void selectionSort(arr) {
+    newArray = List<int>.from(json.decode(arr));
+    int minElement;
+    int temp;
+    print('undOrder selection $newArray');
+    Stopwatch stopwatch3 = Stopwatch()..start();
+    for (int i = 0; i < newArray.length; i++) {
+      minElement = i;
+      for (int j = i + 1; j < newArray.length; j++) {
+        if (newArray[j] < newArray[minElement]) {
+          minElement = j;
+          temp = newArray[minElement];
+          newArray[minElement] = newArray[i];
+          newArray[i] = temp;
+        }
+      }
+    }
+    int stop = stopwatch3.elapsedMicroseconds;
+    setState(() {
+      selection = stop;
+    });
+    print('Order Selection $newArray');
+  }
+
+///////////////////////////////////////////////////////////////////////////////////
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -182,6 +241,7 @@ class _MyAppState extends State<MyApp> {
                       //setState(() => {changeToArr()}),
                       bubbleSort(arr),
                       insertionSort(arr),
+                      selectionSort(arr),
                     },
                   ),
                 ),
@@ -204,6 +264,17 @@ class _MyAppState extends State<MyApp> {
                     leading: const FlutterLogo(size: 30.0),
                     title: Text(
                       'Insertion Sort:\n' + insertion.toString() + '  us',
+                    ),
+                  )),
+                ),
+                SizedBox(
+                  width: 300,
+                  height: 80,
+                  child: Card(
+                      child: ListTile(
+                    leading: const FlutterLogo(size: 30.0),
+                    title: Text(
+                      'Selection Sort:\n' + selection.toString() + '  us',
                     ),
                   )),
                 )
