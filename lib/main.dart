@@ -17,27 +17,14 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final myController = TextEditingController();
   var arr = "";
+  int bubble = 0;
+  int insertion = 0;
 
-  //late List<int> intArray;
-  late List newArray2;
+  late List newArray;
 
   changeToArr() {
-    //arr = arr.replaceAll(new RegExp('[]'), '');
-    newArray2 = json.decode(arr);
-    //print(newArray2);
-    //print(newArray2[0]);
-    //var valuesArray = int.parse(arr);
-    //newArray2[i]//final newArray = arr.replaceAll(new RegExp(r'[^0-9]'), '');
-    //var latestVersion = List<int>.from(json.decode(arr));
-    //intArray = List<int>.from(json.decode(newArray));
-    //print(int.parse(newArray));
-    //print('This from stackoverflow website    $latestVersion');
+    newArray = List<int>.from(json.decode(arr));
   }
-
-  /*
-  String get name => this.form.control('array').value;
-  */
-  int bubble = 0;
 
   @override
   void dispose() {
@@ -47,15 +34,23 @@ class _MyAppState extends State<MyApp> {
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-/* BubbleSort */
+/* 1- BubbleSort */
+
 /*
  * Algorithm:-
  *
  * 1- we need to make a loop over the arr
  *
- * 2- we need to make another loop (nested) over the arr starting from the index 1 j = 1
+ * 2- then I need to give value to the newArray which it a list of integers from the input field
  *
- * 3- we need to make a comparison between two value
+ * 3-  I will make an instance from the Stopwatch to start counting the time execution for the method
+ *  to know the sorting time will take it.
+ *
+ * 4- we need to make another loop (nested) over the arr starting from the index 1 j = 1
+ *
+ * 5- I need to declare a boolean variable called swapped and give it false value
+ *
+ * 3- we need to make a comparison between two values
  *
  * 4- the condition will be if the second element smaller than the first one we need to make some steps:-
  *
@@ -67,33 +62,67 @@ class _MyAppState extends State<MyApp> {
  *
  *      d- Then we take the value that we save in the temporary variable and assign it to the bigger element
  *
+ *      e- I will reassign the value for the variable swapped because we make an swap process between two value in the list
+ *
  * 5- This process will coming over and over again even the array will be sorted in ascending order.
  *
- * 6- At the end i will return the arr.
+ * 6- I will check if the swapped process not happened i will break the function
+ *
+ * 7- I will declare a variable called stop with value contain the time execution which i take it from
+ * from the instance i declare it at the first of function (stopwatch1)
+ *
+ * 8- after this I will create setState method that will assign the value for the stop variable to the bubble variable.
+ *  Then I will show the result inside the container
+ *
+ *
+ *
  */
-  bubbleSort(newArray2) {
-    Stopwatch stopwatch1 = new Stopwatch()..start();
-    for (var i = 0; i < newArray2.length; i++) {
-      //newArray2[i] = int.parse(newArray2[i]);
+  void bubbleSort(arr) {
+    newArray = List<int>.from(json.decode(arr));
+    print('undOrder bubble $newArray');
+    Stopwatch stopwatch1 = Stopwatch()..start();
+    for (int i = 0; i < newArray.length; i++) {
       bool swapped = false;
-      for (var j = 1; j < newArray2.length; j++) {
-        if (newArray2[j] < newArray2[j - 1]) {
-          var temporary = newArray2[j];
-          newArray2[j] = newArray2[j - 1];
-          newArray2[j - 1] = temporary;
+      for (int j = 1; j < newArray.length; j++) {
+        if (newArray[j] < newArray[j - 1]) {
+          var temporary = newArray[j];
+          newArray[j] = newArray[j - 1];
+          newArray[j - 1] = temporary;
           swapped = true;
         }
       }
       if (!swapped) break;
     }
-    //return arr;
 
     int stop = stopwatch1.elapsedMicroseconds;
     setState(() {
       bubble = stop;
-      print('bubble Time $bubble');
     });
-    print('test array $newArray2');
+    print('Order bubble $newArray');
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////
+  /* InsertionSort */
+  void insertionSort(arr) {
+    newArray = List<int>.from(json.decode(arr));
+    print('undOrder insertion $newArray');
+    Stopwatch stopwatch2 = Stopwatch()..start();
+    for (int i = 0; i < newArray.length; i++) {
+      var x = newArray[i], j = i;
+
+      while (j > 0 && newArray[j - 1] > x) {
+        newArray[j] = newArray[j - 1];
+        newArray[j - 1] = x;
+        j--;
+      }
+
+      newArray[j] = x;
+    }
+    int stop = stopwatch2.elapsedMicroseconds;
+    setState(() {
+      insertion = stop;
+    });
+    print('Order insertion $newArray');
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////
@@ -110,9 +139,6 @@ class _MyAppState extends State<MyApp> {
                   child: TextField(
                     onChanged: (text) {
                       this.arr = text;
-                      // print('array of Integers $arr');
-
-                      //print(bubbleSort(text));
                     },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -125,15 +151,15 @@ class _MyAppState extends State<MyApp> {
                   child: ElevatedButton(
                     child: const Text('Analyze Now'),
                     onPressed: () => {
-                      //print("The Button Clicked"),
-                      setState(() => {changeToArr()}),
-                      bubbleSort(newArray2)
+                      //setState(() => {changeToArr()}),
+                      bubbleSort(arr),
+                      insertionSort(arr),
                     },
                   ),
                 ),
                 Container(
                   width: 300,
-                  height: 60,
+                  height: 80,
                   child: Card(
                       child: ListTile(
                     leading: FlutterLogo(size: 30.0),
@@ -142,6 +168,17 @@ class _MyAppState extends State<MyApp> {
                     ),
                   )),
                 ),
+                Container(
+                  width: 300,
+                  height: 80,
+                  child: Card(
+                      child: ListTile(
+                    leading: FlutterLogo(size: 30.0),
+                    title: Text(
+                      'Insertion Sort:\n' + insertion.toString() + '  us',
+                    ),
+                  )),
+                )
               ],
             )));
   }
