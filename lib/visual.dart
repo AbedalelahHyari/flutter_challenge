@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_challenge/analysis.dart';
 
 class Visual extends StatefulWidget {
   const Visual({Key? key}) : super(key: key);
@@ -131,43 +132,7 @@ class _VisualState extends State<Visual> {
     }
   }
 
-//////////////////////////////////////////////////////////////////////////////////
-  _quickSortVisualiser(List<int> quickArr, int low, int high) async {
-    print('Quick sort visualiser called');
-    int pivot;
-    if (low < high) {
-      /* pi is partitioning index, arr[pi] is now
-           at right place */
-      pivot = await _partition(quickArr, low, high);
-
-      await _quickSortVisualiser(quickArr, low, pivot - 1); // Before pi
-      await _quickSortVisualiser(quickArr, pivot + 1, high); // After pi
-    }
-  }
-
-//////////////////////////////////////////////////////////////////////////////////
-  //helper function to partition array for quicksort
-  Future<int> _partition(List<int> quickArr, int low, int high) async {
-    int pivot = quickArr[high];
-    int i = (low - 1);
-    int temp;
-    for (int j = low; j <= high - 1; j++) {
-      if (quickArr[j] < pivot) {
-        i++;
-        temp = quickArr[i];
-        quickArr[i] = quickArr[j];
-        quickArr[j] = temp;
-        await _updateArrayWithDelay(quickArr);
-      }
-    }
-    temp = quickArr[i + 1];
-    quickArr[i + 1] = quickArr[high];
-    quickArr[high] = temp;
-    await _updateArrayWithDelay(quickArr);
-    return (i + 1);
-  }
-
-//////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
   _mergeSortVisualiser(List<int> mergeArr, int low, int high) async {
     print('Merge Sort called');
     print('Array size is : "${mergeArr.length}"');
@@ -196,10 +161,12 @@ class _VisualState extends State<Visual> {
     List<int> L = [], R = [];
 
     /* Copy data to temp arrays L[] and R[] */
-    for (i = 0; i < n1; i++)
-      L.add(mergeArr[low + i]); //L[i] = mergeArr[low + i];
-    for (j = 0; j < n2; j++)
-      R.add(mergeArr[mid + 1 + j]); //R[j] = mergeArr[mid + 1 + j];
+    for (i = 0; i < n1; i++) {
+      L.add(mergeArr[low + i]);
+    } //L[i] = mergeArr[low + i];
+    for (j = 0; j < n2; j++) {
+      R.add(mergeArr[mid + 1 + j]);
+    } //R[j] = mergeArr[mid + 1 + j];
 
     i = 0;
     j = 0;
@@ -234,7 +201,9 @@ class _VisualState extends State<Visual> {
     int n = heapArr.length;
 
     // Build heap (rearrange array)
-    for (int i = n ~/ 2 - 1; i >= 0; i--) await heapify(heapArr, n, i);
+    for (int i = n ~/ 2 - 1; i >= 0; i--) {
+      await heapify(heapArr, n, i);
+    }
 
     // One by one extract an element from heap
     for (int i = n - 1; i >= 0; i--) {
@@ -278,32 +247,37 @@ class _VisualState extends State<Visual> {
           AppBar(
             title: const Text('Visualization'),
           ),
-          ElevatedButton(
-              onPressed: () {
-                bubblesort(arr);
-              },
-              child: const Text("Bubble Sort")),
-          ElevatedButton(
-              onPressed: () {
-                selectionSortVisualiser(arr);
-              },
-              child: const Text("Selection Sort")),
-          ElevatedButton(
-              onPressed: () {
-                _insertionSortVisualiser(arr);
-              },
-              child: const Text("Insertion Sort")),
-          ElevatedButton(
-              onPressed: () {
-                _mergeSortVisualiser(arr, 0, arr.length - 1);
-              },
-              child: const Text("Merge Sort")),
-          ElevatedButton(
-              onPressed: () {
-                _heapSortVisualiser(arr);
-              },
-              child: const Text("Heap Sort")),
-          const SizedBox(height: 100),
+          const SizedBox(height: 20),
+          Column(
+            children: <Widget>[
+              ElevatedButton(
+                  onPressed: () {
+                    bubblesort(arr);
+                  },
+                  child: const Text("Bubble Sort")),
+              ElevatedButton(
+                  onPressed: () {
+                    selectionSortVisualiser(arr);
+                  },
+                  child: const Text("Selection Sort")),
+              ElevatedButton(
+                  onPressed: () {
+                    _insertionSortVisualiser(arr);
+                  },
+                  child: const Text("Insertion Sort")),
+              ElevatedButton(
+                  onPressed: () {
+                    _mergeSortVisualiser(arr, 0, arr.length - 1);
+                  },
+                  child: const Text("Merge Sort")),
+              ElevatedButton(
+                  onPressed: () {
+                    _heapSortVisualiser(arr);
+                  },
+                  child: const Text("Heap Sort")),
+            ],
+          ),
+          const SizedBox(height: 40),
           Container(
             height: 250,
             color: Colors.blueGrey,
@@ -311,6 +285,15 @@ class _VisualState extends State<Visual> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: arr.map((val) => _widget(val.toDouble())).toList()),
           ),
+          ElevatedButton(
+            child: const Text('Back'),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
+              );
+            },
+          )
         ]),
       ),
     );

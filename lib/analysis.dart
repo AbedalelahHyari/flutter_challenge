@@ -5,6 +5,8 @@ import 'package:flutter_challenge/visual.dart';
 //////////////////////////////////////////////////////////////////////////////////////////
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -73,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
  */
   void bubbleSort() {
     newArray = List<int>.from(json.decode(arr));
-    print('undOrder bubble $newArray');
+    //print('undOrder bubble $newArray');
     Stopwatch stopwatch1 = Stopwatch()..start();
     for (int i = 0; i < newArray.length; i++) {
       bool swapped = false;
@@ -92,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       bubble = stop;
     });
-    print('Order bubble $newArray');
+    //print('Order bubble $newArray');
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////
@@ -294,7 +296,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Enter The List here...',
+                  hintText: 'Add The array here=>  [3,2,1,0]',
                 ),
               ),
             ),
@@ -392,11 +394,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             ElevatedButton(
-              child: const Text('Open route'),
+              child: const Text('Visualization Section'),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Visual()),
+                  MaterialPageRoute(builder: (context) => const Visual()),
                 );
               },
             ),
