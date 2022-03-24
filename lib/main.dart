@@ -23,6 +23,7 @@ class _MyAppState extends State<MyApp> {
   int selection = 0;
   int heap = 0;
 
+  int merge = 0;
   late List newArray;
 
   @override
@@ -76,9 +77,9 @@ class _MyAppState extends State<MyApp> {
  * 10- after this I will create setState method that will assign the value for the (stop variable) to the (bubble variable).
  *  Then I will show the result inside the container
  */
-  void bubbleSort(arr) {
+  void bubbleSort() {
     newArray = List<int>.from(json.decode(arr));
-    //print('undOrder bubble $newArray');
+    print('undOrder bubble $newArray');
     Stopwatch stopwatch1 = Stopwatch()..start();
     for (int i = 0; i < newArray.length; i++) {
       bool swapped = false;
@@ -97,7 +98,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       bubble = stop;
     });
-    //print('Order bubble $newArray');
+    print('Order bubble $newArray');
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////
@@ -131,9 +132,9 @@ class _MyAppState extends State<MyApp> {
  *  Then I will show the result inside the container
  */
 
-  void insertionSort(arr) {
+  void insertionSort() {
     newArray = List<int>.from(json.decode(arr));
-    //print('undOrder insertion $newArray');
+    print('undOrder insertion $newArray');
     Stopwatch stopwatch2 = Stopwatch()..start();
     for (int i = 1; i < newArray.length; i++) {
       int currentElement = newArray[i];
@@ -148,7 +149,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       insertion = stop;
     });
-    // print('Order insertion $newArray');
+    print('Order insertion $newArray');
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////
@@ -184,11 +185,11 @@ class _MyAppState extends State<MyApp> {
   *     Then I will show the result inside the container
  */
 
-  void selectionSort(arr) {
+  void selectionSort() {
     newArray = List<int>.from(json.decode(arr));
     int minElement;
     int temp;
-    //print('undOrder selection $newArray');
+    print('undOrder selection $newArray');
     Stopwatch stopwatch3 = Stopwatch()..start();
     for (int i = 0; i < newArray.length; i++) {
       minElement = i;
@@ -205,14 +206,14 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       selection = stop;
     });
-    //print('Order Selection $newArray');
+    print('Order Selection $newArray');
   }
 
   //////////////////////////////////////////////////////////////////////////////////
 
   //Heap Sort//
 /*
-* Heap will represent based on Complete Binary Tree
+*                                     /*Heap will represent based on Complete Binary Tree*/
 * There is two type of heap sorting:-
 * 1- Max Heap: The Parent node will be more than or equal the children
 * 2- Min Heap: The Parent node will be less than or equal the children
@@ -249,10 +250,10 @@ class _MyAppState extends State<MyApp> {
     list[i] = temp;
   }
 
-  void heapSort(arr) {
+  void heapSort() {
     Stopwatch stopwatch4 = Stopwatch()..start();
     newArray = List<int>.from(json.decode(arr));
-    //print('undOrder heap $newArray');
+    print('undOrder heap $newArray');
 
     int n = newArray.length;
     for (int i = (n ~/ 2); i >= 0; i--) {
@@ -267,127 +268,126 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       heap = stop;
     });
-    //print('Order heap $newArray');
+    print('Order heap $newArray');
   }
-  //////////////////////////////////////////////////////////////////////////////////
-  
 
 ///////////////////////////////////////////////////////////////////////////////////
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(title: const Text("Sorting Algorithms Types")),
-            body: Column(
-              children: <Widget>[
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 50),
-                  child: TextField(
-                    onChanged: (text) {
-                      arr = text;
-                    },
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Enter The List here...',
+      home: Scaffold(
+        appBar: AppBar(title: const Text("Sorting Algorithms Types")),
+        body: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 50),
+              child: TextField(
+                onChanged: (text) {
+                  arr = text;
+                },
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter The List here...',
+                ),
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 100, vertical: 30),
+              child: ElevatedButton(
+                child: const Text('Analyze Now'),
+                onPressed: () => {
+                  bubbleSort(),
+                  insertionSort(),
+                  selectionSort(),
+                  heapSort(),
+                },
+              ),
+            ),
+            SizedBox(
+              width: 300,
+              height: 80,
+              child: Card(
+                color: Colors.blueGrey,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(9.0))),
+                child: ListTile(
+                  leading: const FlutterLogo(size: 30.0),
+                  title: Text(
+                    'Bubble Sort:\n' + bubble.toString() + '  us',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 100, vertical: 30),
-                  child: ElevatedButton(
-                    child: const Text('Analyze Now'),
-                    onPressed: () => {
-                      bubbleSort(arr),
-                      insertionSort(arr),
-                      selectionSort(arr),
-                      heapSort(arr),
-                    },
-                  ),
-                ),
-                SizedBox(
-                  width: 300,
-                  height: 80,
-                  child: Card(
-                    color: Colors.blueGrey,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(9.0))),
-                    child: ListTile(
-                      leading: const FlutterLogo(size: 30.0),
-                      title: Text(
-                        'Bubble Sort:\n' + bubble.toString() + '  us',
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+              ),
+            ),
+            SizedBox(
+              width: 300,
+              height: 80,
+              child: Card(
+                color: Colors.blueGrey,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(9.0))),
+                child: ListTile(
+                  leading: const FlutterLogo(size: 30.0),
+                  title: Text(
+                    'Insertion Sort:\n' + insertion.toString() + '  us',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 300,
-                  height: 80,
-                  child: Card(
-                    color: Colors.blueGrey,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(9.0))),
-                    child: ListTile(
-                      leading: const FlutterLogo(size: 30.0),
-                      title: Text(
-                        'Insertion Sort:\n' + insertion.toString() + '  us',
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+              ),
+            ),
+            SizedBox(
+              width: 300,
+              height: 80,
+              child: Card(
+                color: Colors.blueGrey,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(9.0))),
+                child: ListTile(
+                  leading: const FlutterLogo(size: 30.0),
+                  title: Text(
+                    'Selection Sort:\n' + selection.toString() + '  us',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 300,
-                  height: 80,
-                  child: Card(
-                    color: Colors.blueGrey,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(9.0))),
-                    child: ListTile(
-                      leading: const FlutterLogo(size: 30.0),
-                      title: Text(
-                        'Selection Sort:\n' + selection.toString() + '  us',
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+              ),
+            ),
+            SizedBox(
+              width: 300,
+              height: 80,
+              child: Card(
+                color: Colors.blueGrey,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(9.0))),
+                child: ListTile(
+                  leading: const FlutterLogo(size: 30.0),
+                  title: Text(
+                    'Heap Sort:\n' + heap.toString() + '  us',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 300,
-                  height: 80,
-                  child: Card(
-                    color: Colors.blueGrey,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(9.0))),
-                    child: ListTile(
-                      leading: const FlutterLogo(size: 30.0),
-                      title: Text(
-                        'Heap Sort:\n' + heap.toString() + '  us',
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            )));
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
