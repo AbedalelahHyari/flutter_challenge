@@ -85,7 +85,7 @@ class _VisualState extends State<Visual> {
 
 //////////////////////////////////////////////////////////////////////////////////
   selectionSortVisualiser(List a) async {
-    print('Selection sort visualiser called');
+    //print('Selection sort visualiser called');
     List<int> selectArr = List.from(a);
     int minIndex, temp;
 
@@ -111,7 +111,7 @@ class _VisualState extends State<Visual> {
 
 //////////////////////////////////////////////////////////////////////////////////
   _insertionSortVisualiser(List a) async {
-    print('Insertion sort visualiser called');
+    //print('Insertion sort visualiser called');
     List<int> insertArr = List.from(a);
     int key, j;
 
@@ -134,8 +134,8 @@ class _VisualState extends State<Visual> {
 
 /////////////////////////////////////////////////////////////////////////////////
   _mergeSortVisualiser(List<int> mergeArr, int low, int high) async {
-    print('Merge Sort called');
-    print('Array size is : "${mergeArr.length}"');
+    //print('Merge Sort called');
+    //print('Array size is : "${mergeArr.length}"');
     if (low < high) {
       // Same as (l+r)/2, but avoids overflow for
       // large l and h

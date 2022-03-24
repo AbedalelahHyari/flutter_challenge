@@ -19,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
   int insertion = 0;
   int selection = 0;
   int heap = 0;
-  int merge = 0;
   late List newArray;
 
   @override
