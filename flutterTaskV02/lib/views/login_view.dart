@@ -15,6 +15,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   late final TextEditingController _email;
   late final TextEditingController _password;
+  ////////////////////////////////////////////////////
 
   @override
   void initState() {
@@ -82,13 +83,15 @@ class _LoginViewState extends State<LoginView> {
                           final email = _email.text;
                           final password = _password.text;
                           try {
+                            // I make an instance from firebase auth that will check if the user credential that will match the stored in the firebase storage
                             await FirebaseAuth.instance
                                 .signInWithEmailAndPassword(
                               email: email,
                               password: password,
                             );
                             final user = FirebaseAuth.instance.currentUser;
-
+                            // on try block //
+                            // I make an condition to check if the user exist first then if he verified or not if the condition output true will take the user to analysis view if false will take it to the verify email view//
                             if (user?.emailVerified ?? false) {
                               Navigator.of(context).pushNamedAndRemoveUntil(
                                 '/analysis/',
@@ -101,6 +104,10 @@ class _LoginViewState extends State<LoginView> {
                               );
                             }
                           } on FirebaseAuthException catch (err) {
+                            /* I make an exception handling on catch block special to the FirebaseAuthException that will handle
+                            the error for the FirebaseAuthentication
+                            */
+
                             if (err.code == 'user-not-found') {
                               await showErrorDialog(
                                 context,
@@ -149,6 +156,8 @@ class _LoginViewState extends State<LoginView> {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+// this future function will show the errors Dialog which belongs to FirebaseAuthException on login process //
 Future<void> showErrorDialog(BuildContext context, String text) {
   return showDialog(
     context: context,

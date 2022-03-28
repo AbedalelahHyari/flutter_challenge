@@ -297,6 +297,7 @@ class _AnalysisViewState extends State<AnalysisView> {
                   case MenuAction.logout:
                     final shouldLogout = await showLogOutDialog(context);
                     if (shouldLogout) {
+                      // this will make a logout from the firebase
                       await FirebaseAuth.instance.signOut();
                       Navigator.of(context)
                           .pushNamedAndRemoveUntil('/login/', (route) => false);
@@ -438,7 +439,9 @@ class _AnalysisViewState extends State<AnalysisView> {
     );
   }
 }
+//////////////////////////////////////////////////////////////
 
+//This a future function that will handle the show/hide the logout dialog based on a boolean value //
 Future<bool> showLogOutDialog(BuildContext context) {
   return showDialog<bool>(
       context: context,

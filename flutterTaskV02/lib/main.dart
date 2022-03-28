@@ -35,6 +35,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // the FutureBuilder widget will initialize the firebase application //
     return FutureBuilder(
       future: Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
@@ -43,7 +44,7 @@ class HomePage extends StatelessWidget {
         switch (snapshot.connectionState) {
           case ConnectionState.done:
             final user = FirebaseAuth.instance.currentUser;
-            //print(user?.emailVerified);
+            // this group of condition that will check the current status for the user who open the application //
             if (user != null) {
               if (user.emailVerified) {
                 return const AnalysisView();

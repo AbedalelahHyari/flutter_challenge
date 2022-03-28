@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sortingalgorithms/sharedWidget/custom_button.dart';
 import 'package:sortingalgorithms/views/analysis_view.dart';
-//import 'package:flutter_challenge/analysis.dart';
 
 class VisualView extends StatefulWidget {
   const VisualView({Key? key}) : super(key: key);
@@ -87,7 +86,6 @@ class _VisualViewState extends State<VisualView> {
 
 //////////////////////////////////////////////////////////////////////////////////
   selectionSortVisualiser(List a) async {
-    //print('Selection sort visualiser called');
     List<int> selectArr = List.from(a);
     int minIndex, temp;
 
@@ -113,7 +111,6 @@ class _VisualViewState extends State<VisualView> {
 
 //////////////////////////////////////////////////////////////////////////////////
   _insertionSortVisualiser(List a) async {
-    //print('Insertion sort visualiser called');
     List<int> insertArr = List.from(a);
     int key, j;
 
@@ -136,13 +133,9 @@ class _VisualViewState extends State<VisualView> {
 
 /////////////////////////////////////////////////////////////////////////////////
   _mergeSortVisualiser(List<int> mergeArr, int low, int high) async {
-    //print('Merge Sort called');
-    //print('Array size is : "${mergeArr.length}"');
     if (low < high) {
-      // Same as (l+r)/2, but avoids overflow for
-      // large l and h
       int mid = (low + (high - low) / 2).toInt();
-      // Sort first and second halves
+
       await _mergeSortVisualiser(mergeArr, low, mid);
 
       await _mergeSortVisualiser(mergeArr, mid + 1, high);
@@ -153,22 +146,20 @@ class _VisualViewState extends State<VisualView> {
   }
 
 //////////////////////////////////////////////////////////////////////////////////
-  //helper function to merge the array for merge sort
+
   merge(List<int> mergeArr, int low, int mid, int high) async {
     int i, j, k;
     int n1 = mid - low + 1;
     int n2 = high - mid;
 
-    /* create temp arrays */
     List<int> L = [], R = [];
 
-    /* Copy data to temp arrays L[] and R[] */
     for (i = 0; i < n1; i++) {
       L.add(mergeArr[low + i]);
-    } //L[i] = mergeArr[low + i];
+    }
     for (j = 0; j < n2; j++) {
       R.add(mergeArr[mid + 1 + j]);
-    } //R[j] = mergeArr[mid + 1 + j];
+    }
 
     i = 0;
     j = 0;
@@ -202,19 +193,16 @@ class _VisualViewState extends State<VisualView> {
   _heapSortVisualiser(List<int> heapArr) async {
     int n = heapArr.length;
 
-    // Build heap (rearrange array)
     for (int i = n ~/ 2 - 1; i >= 0; i--) {
       await heapify(heapArr, n, i);
     }
 
-    // One by one extract an element from heap
     for (int i = n - 1; i >= 0; i--) {
-      // Move current root to end
       int temp = heapArr[0];
       heapArr[0] = heapArr[i];
       heapArr[i] = temp;
       await _updateArrayWithDelay(heapArr);
-      // call max heapify on the reduced heap
+
       await heapify(heapArr, i, 0);
     }
   }
@@ -224,18 +212,16 @@ class _VisualViewState extends State<VisualView> {
     int l = 2 * i + 1;
     int r = 2 * i + 2;
 
-    // If left child is larger than root
     if (l < n && heapArr[l] > heapArr[largest]) largest = l;
 
-    // If right child is larger than largest so far
     if (r < n && heapArr[r] > heapArr[largest]) largest = r;
-    // If largest is not root
+
     if (largest != i) {
       int swap = heapArr[i];
       heapArr[i] = heapArr[largest];
       heapArr[largest] = swap;
       await _updateArrayWithDelay(heapArr);
-      // Recursively heapify the affected sub-tree
+
       await heapify(heapArr, n, largest);
     }
   }
@@ -312,7 +298,7 @@ class _VisualViewState extends State<VisualView> {
     );
   }
 }
-
+////////////////////////////////////////////////////////////////////////
 Widget _widget(double h) {
   return Padding(
     padding: const EdgeInsets.only(right: 8.0),

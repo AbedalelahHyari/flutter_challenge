@@ -36,6 +36,7 @@ class _RegisterViewState extends State<RegisterView> {
         title: const Text("Register"),
       ),
       body: FutureBuilder(
+        // this widget will initialize the firebase application before make any operation like login or logout
         future: Firebase.initializeApp(
           options: DefaultFirebaseOptions.currentPlatform,
         ),
@@ -79,6 +80,7 @@ class _RegisterViewState extends State<RegisterView> {
                           final email = _email.text;
                           final password = _password.text;
                           try {
+                            /* I make an instance from firebase auth that will check if the user credential that will match the roles fot the firebase registration process*/
                             await FirebaseAuth.instance
                                 .createUserWithEmailAndPassword(
                               email: email,
@@ -86,8 +88,15 @@ class _RegisterViewState extends State<RegisterView> {
                             );
                             final user = FirebaseAuth.instance.currentUser;
                             user?.sendEmailVerification();
+                            /* I declare a variable called user that will contain of the current user as value
+                            then I will user sendEmailVerification function which belongs to the FirebaseAuth that will send an email to the registered user to verify his account
+                            */
+
                             Navigator.of(context).pushNamed('/verify_email/');
                           } on FirebaseAuthException catch (err) {
+                            /* I make an exception handling on catch block special to the FirebaseAuthException that will handle
+                            the error for the FirebaseAuthentication when the user make a register process
+                            */
                             if (err.code == 'weak-password') {
                               await showErrorDialog(
                                 context,
@@ -139,8 +148,9 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 }
-//////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////
+// this future function will show the errors Dialog which belongs to FirebaseAuthException on the register process //
 Future<void> showErrorDialog(BuildContext context, String text) {
   return showDialog(
     context: context,

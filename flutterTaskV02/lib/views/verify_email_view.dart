@@ -35,6 +35,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
           ),
           CustomButton(
             onPress: () async {
+              /*This asynchronous function will send a verification email to the user if he didn't receive an email  */
               final user = FirebaseAuth.instance.currentUser;
               await user?.sendEmailVerification();
             },
