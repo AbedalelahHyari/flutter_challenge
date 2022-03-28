@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sortingalgorithms/sharedWidget/custom_button.dart';
 import 'package:sortingalgorithms/views/analysis_view.dart';
 //import 'package:flutter_challenge/analysis.dart';
 
@@ -247,37 +248,42 @@ class _VisualViewState extends State<VisualView> {
           AppBar(
             title: const Text('Visualization'),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
           Column(
             children: <Widget>[
-              ElevatedButton(
-                  onPressed: () {
-                    bubblesort(arr);
-                  },
-                  child: const Text("Bubble Sort")),
-              ElevatedButton(
-                  onPressed: () {
-                    selectionSortVisualiser(arr);
-                  },
-                  child: const Text("Selection Sort")),
-              ElevatedButton(
-                  onPressed: () {
-                    _insertionSortVisualiser(arr);
-                  },
-                  child: const Text("Insertion Sort")),
-              ElevatedButton(
-                  onPressed: () {
-                    _mergeSortVisualiser(arr, 0, arr.length - 1);
-                  },
-                  child: const Text("Merge Sort")),
-              ElevatedButton(
-                  onPressed: () {
-                    _heapSortVisualiser(arr);
-                  },
-                  child: const Text("Heap Sort")),
+              CustomButton(
+                onPress: () {
+                  bubblesort(arr);
+                },
+                text: "Bubble Sort",
+              ),
+              CustomButton(
+                onPress: () {
+                  selectionSortVisualiser(arr);
+                },
+                text: "Selection Sort",
+              ),
+              CustomButton(
+                onPress: () {
+                  _insertionSortVisualiser(arr);
+                },
+                text: "Insertion Sort",
+              ),
+              CustomButton(
+                onPress: () {
+                  _mergeSortVisualiser(arr, 0, arr.length - 1);
+                },
+                text: "Merge Sort",
+              ),
+              CustomButton(
+                onPress: () {
+                  _heapSortVisualiser(arr);
+                },
+                text: "Heap Sort",
+              ),
             ],
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: 20),
           Container(
             height: 250,
             color: Colors.blueGrey,
@@ -285,9 +291,9 @@ class _VisualViewState extends State<VisualView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: arr.map((val) => _widget(val.toDouble())).toList()),
           ),
-          ElevatedButton(
-            child: const Text('Back'),
-            onPressed: () {
+          CustomButton(
+            text: 'Back',
+            onPress: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const AnalysisView()),

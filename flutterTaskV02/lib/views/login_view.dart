@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sortingalgorithms/sharedWidget/custom_button.dart';
+import 'package:sortingalgorithms/sharedWidget/txt_button.dart';
 import '../firebase_options.dart';
 
 class LoginView extends StatefulWidget {
@@ -13,6 +15,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   late final TextEditingController _email;
   late final TextEditingController _password;
+
   @override
   void initState() {
     _email = TextEditingController();
@@ -74,8 +77,8 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(25),
-                      child: ElevatedButton(
-                        onPressed: () async {
+                      child: CustomButton(
+                        onPress: () async {
                           final email = _email.text;
                           final password = _password.text;
                           try {
@@ -85,6 +88,7 @@ class _LoginViewState extends State<LoginView> {
                               password: password,
                             );
                             final user = FirebaseAuth.instance.currentUser;
+
                             if (user?.emailVerified ?? false) {
                               Navigator.of(context).pushNamedAndRemoveUntil(
                                 '/analysis/',
@@ -120,17 +124,17 @@ class _LoginViewState extends State<LoginView> {
                             );
                           }
                         },
-                        child: const Text("Login"),
+                        text: "Login",
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {
+                    TxtButton(
+                      onPress: () {
                         Navigator.of(context).pushNamedAndRemoveUntil(
                           '/register/',
                           (route) => false,
                         );
                       },
-                      child: const Text('Go to Register Page'),
+                      text: 'Go to Register Page',
                     ),
                   ],
                 ),
@@ -153,11 +157,11 @@ Future<void> showErrorDialog(BuildContext context, String text) {
         title: const Text('Error happened while login'),
         content: Text(text),
         actions: [
-          TextButton(
-            onPressed: () {
+          TxtButton(
+            onPress: () {
               Navigator.of(context).pop();
             },
-            child: const Text('back'),
+            text: 'back',
           )
         ],
       );

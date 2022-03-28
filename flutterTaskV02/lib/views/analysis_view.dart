@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sortingalgorithms/sharedWidget/custom_button.dart';
+import 'package:sortingalgorithms/sharedWidget/txt_button.dart';
 import 'package:sortingalgorithms/views/visual_view.dart';
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -11,6 +13,7 @@ class AnalysisView extends StatefulWidget {
   _AnalysisViewState createState() => _AnalysisViewState();
 }
 
+// this for the menu in the app bar //
 enum MenuAction { logout }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -328,9 +331,9 @@ class _AnalysisViewState extends State<AnalysisView> {
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 100, vertical: 30),
-              child: ElevatedButton(
-                child: const Text('Analyze Now'),
-                onPressed: () => {
+              child: CustomButton(
+                text: 'Analyze Now',
+                onPress: () => {
                   bubbleSort(),
                   insertionSort(),
                   selectionSort(),
@@ -418,9 +421,9 @@ class _AnalysisViewState extends State<AnalysisView> {
                 ),
               ),
             ),
-            ElevatedButton(
-              child: const Text('Visualization Section'),
-              onPressed: () {
+            CustomButton(
+              text: 'Visualization Section',
+              onPress: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const VisualView()),
@@ -442,17 +445,17 @@ Future<bool> showLogOutDialog(BuildContext context) {
           title: const Text('Log Out'),
           content: const Text('Are you Sure!'),
           actions: [
-            TextButton(
-              onPressed: () {
+            TxtButton(
+              onPress: () {
                 Navigator.of(context).pop(false);
               },
-              child: const Text('Close'),
+              text: 'Close',
             ),
-            TextButton(
-              onPressed: () {
+            TxtButton(
+              onPress: () {
                 Navigator.of(context).pop(true);
               },
-              child: const Text('Log Out'),
+              text: 'Log Out',
             )
           ],
         );

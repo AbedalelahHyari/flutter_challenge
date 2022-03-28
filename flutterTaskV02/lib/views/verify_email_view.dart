@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sortingalgorithms/sharedWidget/custom_button.dart';
+import 'package:sortingalgorithms/sharedWidget/txt_button.dart';
 
 class VerifyEmailView extends StatefulWidget {
   const VerifyEmailView({Key? key}) : super(key: key);
@@ -17,26 +19,36 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
       ),
       body: Column(
         children: [
-          const Text(
-              'Please check your email and accept the verification to access the app'),
-          const Text(
-              'If you are not receiving email verification yet click on the button below'),
-          ElevatedButton(
-            onPressed: () async {
+          const Padding(
+            padding: EdgeInsets.all(30),
+            child: Text(
+              'Please check your email and accept the verification to access the app',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(20),
+            child: Text(
+              'If you are not receiving email verification yet click on the button below',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          CustomButton(
+            onPress: () async {
               final user = FirebaseAuth.instance.currentUser;
               await user?.sendEmailVerification();
             },
-            child: const Text('Send email verification'),
+            text: 'Send email verification',
           ),
-          TextButton(
-            onPressed: () async {
+          TxtButton(
+            onPress: () async {
               await FirebaseAuth.instance.signOut();
               Navigator.of(context).pushNamedAndRemoveUntil(
                 '/login/',
                 (route) => false,
               );
             },
-            child: const Text('Restart'),
+            text: 'Restart',
           ),
         ],
       ),

@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:sortingalgorithms/sharedWidget/custom_button.dart';
+import 'package:sortingalgorithms/sharedWidget/txt_button.dart';
 import '../firebase_options.dart';
 
 class RegisterView extends StatefulWidget {
@@ -72,8 +74,8 @@ class _RegisterViewState extends State<RegisterView> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(20),
-                      child: ElevatedButton(
-                        onPressed: () async {
+                      child: CustomButton(
+                        onPress: () async {
                           final email = _email.text;
                           final password = _password.text;
                           try {
@@ -114,17 +116,17 @@ class _RegisterViewState extends State<RegisterView> {
                             );
                           }
                         },
-                        child: const Text("Register"),
+                        text: "Register",
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {
+                    TxtButton(
+                      onPress: () {
                         Navigator.of(context).pushNamedAndRemoveUntil(
                           '/login/',
                           (route) => false,
                         );
                       },
-                      child: const Text('Go to Login Page'),
+                      text: 'Go to Login Page',
                     )
                   ],
                 ),
@@ -147,11 +149,11 @@ Future<void> showErrorDialog(BuildContext context, String text) {
         title: const Text('Error happened while register'),
         content: Text(text),
         actions: [
-          TextButton(
-            onPressed: () {
+          TxtButton(
+            onPress: () {
               Navigator.of(context).pop();
             },
-            child: const Text('back'),
+            text: 'back',
           )
         ],
       );
