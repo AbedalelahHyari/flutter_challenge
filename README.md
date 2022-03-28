@@ -1,7 +1,5 @@
 # Sorting Algorithms
 
-Sorting Algorithms Types
-
 ## 📝 Table of Contents
 
 - [About](#about)
