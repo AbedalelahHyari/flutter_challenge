@@ -209,7 +209,7 @@ class _AnalysisViewState extends State<AnalysisView> {
 
   //Heap Sort//
 /*
-*                                     /*Heap will represent based on Complete Binary Tree*/
+*                    /*Heap will represent based on Complete Binary Tree*/
 * There is two type of heap sorting:-
 * 1- Max Heap: The Parent node will be more than or equal the children
 * 2- Min Heap: The Parent node will be less than or equal the children

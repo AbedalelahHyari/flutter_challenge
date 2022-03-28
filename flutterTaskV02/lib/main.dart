@@ -17,7 +17,7 @@ void main() {
         primarySwatch: Colors.blue,
       ),
       home: const HomePage(),
-      //This the routes for the application and every route its considered as page view //
+      // This is the routes for the application and every route its considered as page view //
       routes: {
         '/login/': (context) => const LoginView(),
         '/register/': (context) => const RegisterView(),

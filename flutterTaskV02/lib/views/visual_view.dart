@@ -4,7 +4,6 @@ import 'package:sortingalgorithms/views/analysis_view.dart';
 
 class VisualView extends StatefulWidget {
   const VisualView({Key? key}) : super(key: key);
-
   @override
   _VisualViewState createState() => _VisualViewState();
 }
