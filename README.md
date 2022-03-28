@@ -1,4 +1,4 @@
-# sorting Algorithms
+# Sorting Algorithms
 
 Sorting Algorithms Types
 
@@ -12,7 +12,7 @@ Sorting Algorithms Types
 
 ## 🧐 About <a name = "about"></a>
 
-This project was build to explain the sorting algorithms types and contain a Authentication and email verification process by using firebase service.
+This project was build to explain the sorting algorithms types and contain a Authentication and email verification process using firebase service.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
