@@ -18,9 +18,9 @@ This project was build to explain the sorting algorithms types and contain a Aut
 
 ```
 - firebase_core
-- firebase_auth: ^3.3.11
- -cloud_firestore: ^3.1.10
- - firebase_analytics: ^9.1.2
+- firebase_auth
+- cloud_firestore
+- firebase_analytics
 ```
 
 ## 🎈 Usage <a name="usage"></a>
