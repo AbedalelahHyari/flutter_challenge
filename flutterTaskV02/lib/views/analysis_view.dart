@@ -317,7 +317,7 @@ class _AnalysisViewState extends State<AnalysisView> {
         body: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 50),
+              padding: const EdgeInsets.fromLTRB(5, 30, 5, 10),
               child: TextField(
                 onChanged: (text) {
                   arr = text;
@@ -329,8 +329,7 @@ class _AnalysisViewState extends State<AnalysisView> {
               ),
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 100, vertical: 30),
+              padding: const EdgeInsets.all(15),
               child: CustomButton(
                 text: 'Analyze Now',
                 onPress: () => {
@@ -421,14 +420,17 @@ class _AnalysisViewState extends State<AnalysisView> {
                 ),
               ),
             ),
-            CustomButton(
-              text: 'Visualization Section',
-              onPress: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const VisualView()),
-                );
-              },
+            Padding(
+              padding: const EdgeInsets.fromLTRB(5, 30, 5, 5),
+              child: CustomButton(
+                text: 'Visualization Section',
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const VisualView()),
+                  );
+                },
+              ),
             ),
           ],
         ),

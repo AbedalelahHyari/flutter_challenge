@@ -5,6 +5,7 @@ import 'package:sortingalgorithms/views/analysis_view.dart';
 
 class VisualView extends StatefulWidget {
   const VisualView({Key? key}) : super(key: key);
+
   @override
   _VisualViewState createState() => _VisualViewState();
 }
@@ -288,17 +289,23 @@ class _VisualViewState extends State<VisualView> {
             height: 250,
             color: Colors.blueGrey,
             child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: arr.map((val) => _widget(val.toDouble())).toList()),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: arr.map((val) => _widget(val.toDouble())).toList(),
+            ),
           ),
-          CustomButton(
-            text: 'Back',
-            onPress: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AnalysisView()),
-              );
-            },
+          Padding(
+            padding: const EdgeInsets.fromLTRB(5, 20, 5, 0),
+            child: CustomButton(
+              text: 'Back',
+              onPress: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AnalysisView(),
+                  ),
+                );
+              },
+            ),
           )
         ]),
       ),
